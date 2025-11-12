@@ -35,9 +35,9 @@ jobs:
         username: ${{ vars.USERNAME }}
         password: ${{ secrets.TOKEN }}
     - name: Build Docker image
-      run: docker build -t cicdback:latest .
+      run: docker build -t ${{ env.imagename }} .
     - name: Push Docker image
-      run: docker push ${{ vars.USERNAME }}/cicdback:latest
+      run: docker push ${{ env.imagename }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
