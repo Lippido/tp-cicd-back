@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 env:
-  imagename: ${{ vars.USERNAME }}/cicdBack:${{ github.ref_name }}
+  imagename: ${{ vars.USERNAME }}/cicdback:${{ github.ref_name }}
 
 name: Java CI with Maven
 
@@ -18,9 +18,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -37,7 +35,7 @@ jobs:
         username: ${{ vars.USERNAME }}
         password: ${{ secrets.TOKEN }}
     - name: Build Docker image
-      run: docker build -t cicdBack .
+      run: docker build -t cicdback .
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
