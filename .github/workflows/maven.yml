@@ -5,7 +5,9 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-
+env:
+  imagename: usernameDocker/nomImage:github.ref_name
+  
 name: Java CI with Maven
 
 on:
