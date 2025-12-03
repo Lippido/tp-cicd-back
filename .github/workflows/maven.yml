@@ -38,11 +38,17 @@ jobs:
         run: docker build -t ${{ env.imagename }} .
       - name: Push Docker image
         run: docker push ${{ env.imagename }}
-      - name: Deploy to Render
-        uses: gh-actions-workflows/deploy-docker-render@v1.1
-        with:
-          deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image-url: my-dockerhub-user/my-app:my-tag 
+
+  deploy:
+    if: ${{ github.ref_type == 'tag' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Render
+      uses: gh-actions-workflows/deploy-docker-render@v1.1
+      with:
+        deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        image-url: my-dockerhub-user/my-app:my-tag 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
